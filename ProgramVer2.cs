@@ -103,8 +103,6 @@ public class CommissionEmployee : Employee
 }
 public class Program
 {
-    public static void Main(string[] args)
-    {
         public static void Main(string[] args)
         {
             try
@@ -152,6 +150,3 @@ public class Program
             Console.WriteLine($"Name: {employee.Name}, ID: {employee.ID}, Salary: {employee.Salary}");
         }
     }
-    
-    //main,
-}
