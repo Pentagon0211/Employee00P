@@ -1,31 +1,66 @@
-
+using System;
+using System.Xml.Linq;
 namespace Employee;
 
 
 public class Employee
 {
-    public string name { get; set; }
-    public int id { get; set; }
-    public float salary { get; set; }
+    private string _name;
+    private int _id;
+    private float _salary;
+
+    public string Name
+    {
+        get => _name;
+        set => _name = value;
+    }
+
+    public int ID
+    {
+        get => _id;
+        set
+        {
+            if (value > 0)
+                _id = value;
+
+            else
+                throw new ArgumentException("ID must be positve");
+        }
+
+    }
+
+    public float Salary
+    {
+        get => _salary;
+        set
+        {
+            if (value >= 0)
+                _salary = value;
+
+            else
+                throw new ArgumentException("Salary cannot be negative");
+        }
+    }
+
 
     public Employee(string name, int id)
     {
-        this.name = name;
-        this.id = id;
-        salary = 0;
+        Name = name;
+        ID = id;
+        Salary = 0;
     }
 
     public float ApplyBonus(float threshold, float bonus)
     {
-        float total = salary;
-        if (salary > threshold)
+        float total = Salary;
+        if (Salary > threshold)
         {
-            salary += bonus;
-          
+            Salary += bonus;
+
         }
         return total;
-        
-        
+
+
     }
 }
 
@@ -34,34 +69,53 @@ public class RegularEmployee : Employee
     public float FixedRate = 3000;
 
     public RegularEmployee(string name, int id) : base(name, id)
-    {
-        this.name=name;
-        this.id=id;
-    }
+    { }
 
     public float CalculateSalary()
     {
-        salary = FixedRate;
-        return salary;
+        Salary = FixedRate;
+        return Salary;
     }
-    
+
 }
 
 public class HourlyEmployee : Employee
 {
-    public float HoursWorked { get; set; }
-    public float HourlyRate { get; set; }
+    private float _hoursWorked;
+    private float _hourlyRate;
 
-    public HourlyEmployee(string name, int id, float HoursWorked, float HourlyRate) : base(name, id)
+    public float HoursWorked
     {
-        this.HoursWorked = HoursWorked;
-        this.HourlyRate = HourlyRate;
+        get => _hoursWorked;
+        set
+        {
+            if (value >= 0)
+                _hoursWorked = value;
+            else
+                throw new ArgumentException("Hours worked must be not negatve");
+        }
     }
 
+    public float HourlyRate
+    {
+        get => _hourlyRate;
+        set
+        {
+            if (value >= 0)
+                _hourlyRate = value;
+            else
+                throw new ArgumentException("Hourly rates cannot be less than zero");
+        }
+    }
+    public HourlyEmployee(string name, int id, float hoursWorked, float hourlyRate) : base(name, id)
+    {
+        HoursWorked = hoursWorked;
+        HourlyRate = hourlyRate;
+    }
     public float CalculateSalary()
     {
-        salary = HoursWorked * HourlyRate;
-        return salary;
+        Salary = HoursWorked * HourlyRate;
+        return Salary;
     }
 }
 public class CommissionEmployee : Employee
