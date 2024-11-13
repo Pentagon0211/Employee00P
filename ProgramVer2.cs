@@ -105,35 +105,43 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        var alice = new RegularEmployee("Alice", 1);
-        var bob = new HourlyEmployee("Bob", 2, 160, 20.5F);
-        var charlie = new CommissionEmployee("Charlie", 3, 50000, 0.10F);
+        try
+        {
+            var alice = new RegularEmployee("Alice", 1);
+            var bob = new HourlyEmployee("Bob", 2, 160, 20.5F);
+            var charlie = new CommissionEmployee("Charlie", 3, 50000, 0.10F);
 
-        alice.CalculateSalary();
-        bob.CalculateSalary();
-        charlie.CalculateSalary();
+            alice.CalculateSalary();
+            bob.CalculateSalary();
+            charlie.CalculateSalary();
 
-        Console.WriteLine("Employee Salaries before bonus: ");
-        DisplayEmployeeSalary(alice);
-        DisplayEmployeeSalary(bob);
-        DisplayEmployeeSalary(charlie);
+            Console.WriteLine("Employee Salaries before bonus: ");
+            DisplayEmployeeSalary(alice);
+            DisplayEmployeeSalary(bob);
+            DisplayEmployeeSalary(charlie);
 
-        float bonusThreshold = 4000.0F;
-        float bonusAmount = 1000.00F;
-        alice.ApplyBonus(bonusThreshold, bonusAmount);
-        bob.ApplyBonus(bonusThreshold, bonusAmount);
-        charlie.ApplyBonus(bonusThreshold, bonusAmount);
+            float bonusThreshold = 4000.0F;
+            float bonusAmount = 1000.00F;
+            alice.ApplyBonus(bonusThreshold, bonusAmount);
+            bob.ApplyBonus(bonusThreshold, bonusAmount);
+            charlie.ApplyBonus(bonusThreshold, bonusAmount);
 
 
-        Console.WriteLine();
-        Console.WriteLine("Employee salaries (after bonus): ");
-        DisplayEmployeeSalary(alice);
-        DisplayEmployeeSalary(bob);
-        DisplayEmployeeSalary(charlie);
+            Console.WriteLine();
+            Console.WriteLine("Employee salaries (after bonus): ");
+            DisplayEmployeeSalary(alice);
+            DisplayEmployeeSalary(bob);
+            DisplayEmployeeSalary(charlie);
 
-        float totalPayroll = alice.Salary + bob.Salary + charlie.Salary;
-        Console.WriteLine($"\nTotal Payroll: {totalPayroll}");
-         
+            float totalPayroll = alice.Salary + bob.Salary + charlie.Salary;
+            Console.WriteLine($"\nTotal Payroll: {totalPayroll}");
+        }
+        catch(catch (Exception ex) 
+        {
+            Console.WriteLine("Something went wrong");
+          
+        }
+
 
 
         static void DisplayEmployeeSalary(Employee employee)
