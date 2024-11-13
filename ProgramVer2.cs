@@ -1,4 +1,3 @@
-
 namespace Employee;
 
 
@@ -66,17 +65,39 @@ public class HourlyEmployee : Employee
 }
 public class CommissionEmployee : Employee
 {
-    public float salesAmount { get; set; }
-    public float commissionRate { get; set; }
+    private float _salesAmount;
+    private float _commissionRate;
 
+    public float SalesAmount
+    {
+        get => _salesAmount;
+        set
+        {
+            if (value >= 0)
+                _salesAmount = value;
+            else
+                throw new ArgumentException("Sales amount cannot be negative");
+        }
+    }
+    public float CommissionRate
+    {
+        get => _commissionRate;
+        set
+        {
+            if (value >= 0)
+                _commissionRate = value;
+            else
+                throw new ArgumentException("Commission rate cannot be negative");
+        }
+    }
     public CommissionEmployee(string name, int ID, float salesAmount, float commissionRate) : base(name, ID)
     {
-        this.salesAmount = salesAmount;
-        this.commissionRate = commissionRate;
+        SalesAmount = salesAmount;
+        CommissionRate = commissionRate;
     }
     public void CalculateSalary()
     {
-        salary = salesAmount * commissionRate;
+        Salary = SalesAmount * CommissionRate;
     }
 
 }
@@ -110,14 +131,14 @@ public class Program
         DisplayEmployeeSalary(bob);
         DisplayEmployeeSalary(charlie);
 
-        float totalPayroll = alice.salary + bob.salary + charlie.salary;
+        float totalPayroll = alice.Salary + bob.Salary + charlie.Salary;
         Console.WriteLine($"\nTotal Payroll: {totalPayroll}");
-
+         
 
 
         static void DisplayEmployeeSalary(Employee employee)
         {
-            Console.WriteLine($"Name: {employee.name}, ID: {employee.id}, Salary: {employee.salary}");
+            Console.WriteLine($"Name: {employee.Name}, ID: {employee.ID}, Salary: {employee.Salary}");
         }
     }
 }
