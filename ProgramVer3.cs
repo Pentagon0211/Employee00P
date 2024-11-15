@@ -3,7 +3,7 @@ using System.Xml.Linq;
 namespace Employee;
 
 
-public class Employee
+public abstract class Employee
 {
     private string _name;
     private int _id;
@@ -49,6 +49,7 @@ public class Employee
         ID = id;
         Salary = 0;
     }
+    public abstract float CalculateSalary();
 
     public float ApplyBonus(float threshold, float bonus)
     {
