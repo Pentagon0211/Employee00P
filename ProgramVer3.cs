@@ -71,7 +71,7 @@ public class RegularEmployee : Employee
     public RegularEmployee(string name, int id) : base(name, id)
     { }
 
-    public float CalculateSalary()
+    public override float CalculateSalary()
     {
         Salary = FixedRate;
         return Salary;
@@ -112,7 +112,7 @@ public class HourlyEmployee : Employee
         HoursWorked = hoursWorked;
         HourlyRate = hourlyRate;
     }
-    public float CalculateSalary()
+    public override float CalculateSalary()
     {
         Salary = HoursWorked * HourlyRate;
         return Salary;
@@ -150,9 +150,10 @@ public class CommissionEmployee : Employee
         SalesAmount = salesAmount;
         CommissionRate = commissionRate;
     }
-    public void CalculateSalary()
+    public override float CalculateSalary()
     {
         Salary = SalesAmount * CommissionRate;
+        return Salary;
     }
 
 }
